@@ -1,5 +1,6 @@
 const addForm = document.querySelector(".add");
 const list = document.querySelector(".todos");
+const search = document.querySelector(".search input");
 
 //function that add one example at the end of list (it makes code more reusable)(help to dynamic website)
 const generateTemplate = (todo) => {
@@ -12,7 +13,6 @@ const generateTemplate = (todo) => {
   //add this new template at the end of list
   list.innerHTML += html;
 };
-
 //event listener + get event as a promiter action
 addForm.addEventListener("submit", (e) => {
   //prevent from reloading
@@ -26,11 +26,28 @@ addForm.addEventListener("submit", (e) => {
     addForm.reset();
   }
 });
-//Not working
-
 //dlete todos //attached an event listener to ul
 list.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete")) {
-    e.target.generateElement.remove();
+    //removing from parent
+    e.target.parentElement.remove();
+    console.log("alert");
   }
+});
+
+const filterTodos = (term) => {
+  //get the list from html and change it to Array
+  Array.form(list.children)
+    //! make that false and change it to boolean
+    .filter((todo) => !todo.textContent.includes(term))
+    .forEach((todo) => todo.classList.add("filtered"));
+  Array.form(list.children)
+    .filter((todo) => todo.textContent.includes(term))
+    .forEach((todo) => todo.classList.remove("filtered"));
+};
+
+//key event for search box
+search.addEventListener("keyup", () => {
+  const term = search.value.trim();
+  filterTodos(term);
 });
