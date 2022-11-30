@@ -31,7 +31,6 @@ list.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete")) {
     //removing from parent
     e.target.parentElement.remove();
-    console.log("alert");
   }
 });
 
